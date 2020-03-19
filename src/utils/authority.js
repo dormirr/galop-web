@@ -27,11 +27,12 @@ export function getAuthority(str) {
 
   return authority;
 }
+
 export function setAuthority(authority) {
   const proAuthority = typeof authority === 'string' ? [authority] : authority;
 
-  // 自动加载
   localStorage.setItem('authority', JSON.stringify(proAuthority));
 
+  // 自动加载
   reloadAuthorized();
 }
