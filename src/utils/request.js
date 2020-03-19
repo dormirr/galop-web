@@ -4,6 +4,7 @@
  */
 import { extend } from 'umi-request';
 import { notification } from 'antd';
+
 const codeMessage = {
   200: '服务器成功返回请求的数据。',
   201: '新建或修改数据成功。',
@@ -21,10 +22,10 @@ const codeMessage = {
   503: '服务不可用，服务器暂时过载或维护。',
   504: '网关超时。',
 };
+
 /**
  * 异常处理程序
  */
-
 const errorHandler = error => {
   const { response } = error;
 
@@ -44,13 +45,17 @@ const errorHandler = error => {
 
   return response;
 };
+
 /**
  * 配置request请求时的默认参数
  */
-
 const request = extend({
+  headers: {
+    Authorization: sessionStorage.getItem('Authorization'),
+  },
   errorHandler,
   // 默认错误处理
   credentials: 'include', // 默认请求是否带上cookie
 });
+
 export default request;
