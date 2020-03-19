@@ -83,13 +83,24 @@ export default {
   // umi routes: https://umijs.org/zh/guide/router.html
   routes: [
     {
-      path: '/user',
-      component: '../layouts/UserLayout',
+      path: '/',
+      component: '../layouts/BlankLayout',
       routes: [
         {
-          name: 'login',
-          path: '/user/login',
-          component: './user/login',
+          path: '/user',
+          component: '../layouts/UserLayout',
+          routes: [
+            {
+              path: '/user',
+              redirect: '/user/login',
+            },
+            {
+              name: 'login',
+              icon: 'smile',
+              path: '/user/login',
+              component: './login',
+            },
+          ],
         },
       ],
     },
