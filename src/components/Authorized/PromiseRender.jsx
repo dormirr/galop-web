@@ -1,7 +1,8 @@
 import React from 'react';
 import { Spin } from 'antd';
 import isEqual from 'lodash/isEqual';
-import { isComponentClass } from './Secured'; // eslint-disable-next-line import/no-cycle
+import { isComponentClass } from './Secured';
+// eslint-disable-next-line import/no-cycle
 
 export default class PromiseRender extends React.Component {
   state = {
@@ -21,8 +22,9 @@ export default class PromiseRender extends React.Component {
 
     if (nextState.component !== component) return true;
     return false;
-  }; // set render Component : ok or error
+  };
 
+  // 设置渲染组件：ok 或 error
   setRenderComponent(props) {
     const ok = this.checkIsInstantiation(props.ok);
     const error = this.checkIsInstantiation(props.error);
@@ -38,11 +40,12 @@ export default class PromiseRender extends React.Component {
           component: error,
         });
       });
-  } // Determine whether the incoming component has been instantiated
-  // AuthorizedRoute is already instantiated
-  // Authorized  render is already instantiated, children is no instantiated
-  // Secured is not instantiated
+  }
 
+  // 确定传入组件是否已实例化
+  // AuthorizedRoute 已经实例化
+  // 授权的渲染已经实例化，子级没有实例化
+  // 安全未实例化
   checkIsInstantiation = target => {
     if (isComponentClass(target)) {
       const Target = target;

@@ -1,10 +1,11 @@
 /* eslint-disable eslint-comments/disable-enable-pair */
-
 /* eslint-disable import/no-mutable-exports */
+
 let CURRENT = 'NULL';
 
 /**
- * use  authority or getAuthority
+ * 使用权限或获取权限
+ *
  * @param {string|()=>String} currentAuthority
  */
 const renderAuthorize = Authorized => currentAuthority => {

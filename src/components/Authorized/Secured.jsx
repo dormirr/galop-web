@@ -1,10 +1,10 @@
 import React from 'react';
 import CheckPermissions from './CheckPermissions';
+
 /**
  * 默认不能访问任何页面
  * default is "NULL"
  */
-
 const Exception403 = () => 403;
 
 export const isComponentClass = component => {
@@ -12,11 +12,12 @@ export const isComponentClass = component => {
   const proto = Object.getPrototypeOf(component);
   if (proto === React.Component || proto === Function.prototype) return true;
   return isComponentClass(proto);
-}; // Determine whether the incoming component has been instantiated
-// AuthorizedRoute is already instantiated
-// Authorized  render is already instantiated, children is no instantiated
-// Secured is not instantiated
+};
 
+// 确定传入组件是否已实例化
+// AuthorizedRoute 已经实例化
+// 授权的渲染已经实例化，子级没有实例化
+// 未实例化安全
 const checkIsInstantiation = target => {
   if (isComponentClass(target)) {
     const Target = target;
@@ -29,27 +30,22 @@ const checkIsInstantiation = target => {
 
   return () => target;
 };
+
 /**
  * 用于判断是否拥有权限访问此 view 权限
  * authority 支持传入 string, () => boolean | Promise
  * e.g. 'user' 只有 user 用户能访问
  * e.g. 'user,admin' user 和 admin 都能访问
- * e.g. ()=>boolean 返回true能访问,返回false不能访问
- * e.g. Promise  then 能访问   catch不能访问
- * e.g. authority support incoming string, () => boolean | Promise
- * e.g. 'user' only user user can access
- * e.g. 'user, admin' user and admin can access
- * e.g. () => boolean true to be able to visit, return false can not be accessed
- * e.g. Promise then can not access the visit to catch
+ * e.g. ()=>boolean 返回 true 能访问,返回 false 不能访问
+ * e.g. Promise then 能访问 catch 不能访问
+ *
  * @param {string | function | Promise} authority
  * @param {ReactNode} error 非必需参数
  */
-
 const authorize = (authority, error) => {
   /**
-   * conversion into a class
-   * 防止传入字符串时找不到staticContext造成报错
-   * String parameters can cause staticContext not found error
+   * 转换成 class
+   * 防止传入字符串时找不到 staticContext 造成报错
    */
   let classError = false;
 
