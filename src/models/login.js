@@ -7,11 +7,14 @@ import { getPageQuery } from '@/utils/utils';
 import { setAuthority } from '@/utils/authority';
 
 const Model = {
-  namespace: 'userAndlogin',
+  namespace: 'login',
   state: {
     status: undefined,
   },
   effects: {
+    /**
+     * 登录
+     */
     *login({ payload }, { call, put }) {
       const response = yield call(login, payload);
       yield put({
@@ -42,13 +45,18 @@ const Model = {
         }
 
         yield put(routerRedux.replace(redirect || '/'));
+      } else if (response.status === 401) {
+        message.error('账号或密码错误！');
       }
     },
 
+    /**
+     * 退出登录
+     */
     *logout({ payload }, { call, put }) {
       const response = yield call(logout, payload);
       yield put({
-        type: 'changeLoginStatus',
+        type: 'deleteLoginToken',
         payload: response,
       });
 
@@ -68,6 +76,10 @@ const Model = {
     },
   },
   reducers: {
+    /**
+     * 保存登录 Token
+     * 保存登录权限
+     */
     changeLoginStatus(state, { payload }) {
       sessionStorage.removeItem('Authorization');
       sessionStorage.setItem('Authorization', payload.token);
@@ -75,11 +87,14 @@ const Model = {
       return { ...state, status: payload.status };
     },
 
+    /**
+     * 删除登录信息
+     */
     deleteLoginToken(state, { payload }) {
       // 删除 Token
       sessionStorage.removeItem('Authorization');
       // 删除角色权限
-      localStorage.removeItem('authority');
+      sessionStorage.removeItem('authority');
       return { ...state, status: payload.status };
     },
   },
