@@ -27,10 +27,10 @@ const noMatch = (
     }
   />
 );
-/**
- * use Authorized check all menu item
- */
 
+/**
+ * 使用授权检查所有菜单项
+ */
 const menuDataRender = menuList =>
   menuList.map(item => {
     const localItem = { ...item, children: item.children ? menuDataRender(item.children) : [] };
@@ -98,21 +98,21 @@ const BasicLayout = props => {
       pathname: '/',
     },
   } = props;
-  /**
-   * constructor
-   */
 
+  /**
+   * 获取登录用户信息
+   */
   useEffect(() => {
     if (dispatch) {
       dispatch({
-        type: 'user/fetchCurrent',
+        type: 'user/fetchCurrentUser',
       });
     }
   }, []);
-  /**
-   * init variables
-   */
 
+  /**
+   * 初始化菜单折叠
+   */
   const handleMenuCollapse = payload => {
     if (dispatch) {
       dispatch({
@@ -120,11 +120,13 @@ const BasicLayout = props => {
         payload,
       });
     }
-  }; // get children authority
+  };
 
+  // 获取权限
   const authorized = getAuthorityFromRouter(props.route.routes, location.pathname || '/') || {
     authority: undefined,
   };
+
   return (
     <>
       <ProLayout
