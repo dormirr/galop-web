@@ -1,10 +1,10 @@
 import { reloadAuthorized } from './Authorized';
 
-// 使用 localStorage 存储权限信息，该权限信息可能是从实际项目中的服务器发送的。
+// 使用 sessionStorage 存储权限信息，该权限信息可能是从实际项目中的服务器发送的。
 export function getAuthority(str) {
   // authorityString 可以是 老师, "老师", ["老师"]
   const authorityString =
-    typeof str === 'undefined' && localStorage ? localStorage.getItem('authority') : str;
+    typeof str === 'undefined' && sessionStorage ? sessionStorage.getItem('authority') : str;
 
   let authority;
 
@@ -31,7 +31,7 @@ export function getAuthority(str) {
 export function setAuthority(authority) {
   const proAuthority = typeof authority === 'string' ? [authority] : authority;
 
-  localStorage.setItem('authority', JSON.stringify(proAuthority));
+  sessionStorage.setItem('authority', JSON.stringify(proAuthority));
 
   // 自动加载
   reloadAuthorized();
