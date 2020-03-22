@@ -12,15 +12,13 @@ const AuthComponent = ({
   location = {
     pathname: '',
   },
-  user,
 }) => {
-  const { currentUser } = user;
   const { routes = [] } = route;
-  const isLogin = currentUser && currentUser.name;
+  const isLogin = sessionStorage && sessionStorage.getItem('Authorization');
   return (
     <Authorized
       authority={getRouteAuthority(location.pathname, routes) || ''}
-      noMatch={isLogin ? <Redirect to="/exception/403" /> : <Redirect to="/user/login" />}
+      noMatch={isLogin ? <Redirect to="/exception/403" /> : <Redirect to="/login" />}
     >
       {children}
     </Authorized>

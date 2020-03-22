@@ -18,14 +18,14 @@ const LoginMessage = ({ content }) => (
 );
 
 const Login = props => {
-  const { userAndlogin = {}, submitting } = props;
-  const { status } = userAndlogin;
+  const { login = {}, submitting } = props;
+  const { status } = login;
   const [autoLogin, setAutoLogin] = useState(true);
 
   const handleSubmit = values => {
     const { dispatch } = props;
     dispatch({
-      type: 'userAndlogin/login',
+      type: 'login/login',
       payload: { ...values },
     });
   };
@@ -77,7 +77,7 @@ const Login = props => {
   );
 };
 
-export default connect(({ userAndlogin, loading }) => ({
-  userAndlogin,
-  submitting: loading.effects['userAndlogin/login'],
+export default connect(({ login, loading }) => ({
+  login,
+  submitting: loading.effects['login/login'],
 }))(Login);

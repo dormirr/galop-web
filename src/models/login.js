@@ -64,9 +64,9 @@ const Model = {
         const { redirect } = getPageQuery();
 
         // 可能存在安全问题，请注意
-        if (window.location.pathname !== '/user/login' && !redirect) {
+        if (window.location.pathname !== '/login' && !redirect) {
           router.replace({
-            pathname: '/user/login',
+            pathname: '/login',
             search: stringify({
               redirect: window.location.href,
             }),
