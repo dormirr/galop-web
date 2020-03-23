@@ -9,5 +9,9 @@ export async function login(params) {
 
 // 退出登录
 export async function logout() {
-  return request.delete('/api/auth/logout');
+  return request.delete('/api/auth/logout', {
+    headers: {
+      Authorization: sessionStorage.getItem('Authorization'),
+    },
+  });
 }
