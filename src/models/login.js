@@ -83,6 +83,8 @@ const Model = {
     changeLoginStatus(state, { payload }) {
       sessionStorage.removeItem('Authorization');
       sessionStorage.setItem('Authorization', payload.token);
+      sessionStorage.removeItem('id');
+      sessionStorage.setItem('id', payload.id);
       setAuthority(payload.authority);
       return { ...state, status: payload.status };
     },
@@ -95,6 +97,8 @@ const Model = {
       sessionStorage.removeItem('Authorization');
       // 删除角色权限
       sessionStorage.removeItem('authority');
+      // 删除用户 id
+      sessionStorage.removeItem('id');
       return { ...state, status: payload.status };
     },
   },
