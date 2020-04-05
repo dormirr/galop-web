@@ -4,7 +4,6 @@
  * https://github.com/ant-design/ant-design-pro-layout
  */
 import ProLayout, { DefaultFooter, SettingDrawer } from '@ant-design/pro-layout';
-import { formatMessage } from 'umi-plugin-react/locale';
 import React, { useEffect } from 'react';
 import { Link } from 'umi';
 import { connect } from 'dva';
@@ -27,10 +26,10 @@ const noMatch = (
     }
   />
 );
-
 /**
  * 使用授权检查所有菜单项
  */
+
 const menuDataRender = menuList =>
   menuList.map(item => {
     const localItem = { ...item, children: item.children ? menuDataRender(item.children) : [] };
@@ -98,10 +97,10 @@ const BasicLayout = props => {
       pathname: '/',
     },
   } = props;
-
   /**
    * 获取登录用户信息
    */
+
   useEffect(() => {
     if (dispatch) {
       dispatch({
@@ -109,10 +108,10 @@ const BasicLayout = props => {
       });
     }
   }, []);
-
   /**
    * 初始化菜单折叠
    */
+
   const handleMenuCollapse = payload => {
     if (dispatch) {
       dispatch({
@@ -120,18 +119,15 @@ const BasicLayout = props => {
         payload,
       });
     }
-  };
+  }; // 获取权限
 
-  // 获取权限
   const authorized = getAuthorityFromRouter(props.route.routes, location.pathname || '/') || {
     authority: undefined,
   };
-
   return (
     <>
       <ProLayout
         logo={logo}
-        formatMessage={formatMessage}
         menuHeaderRender={(logoDom, titleDom) => (
           <Link to="/">
             {logoDom}

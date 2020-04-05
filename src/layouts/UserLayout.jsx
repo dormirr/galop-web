@@ -3,9 +3,7 @@ import { DefaultFooter, getMenuData, getPageTitle } from '@ant-design/pro-layout
 import { Helmet } from 'react-helmet';
 import { Link } from 'umi';
 import React from 'react';
-import { formatMessage } from 'umi-plugin-react/locale';
 import { connect } from 'dva';
-import SelectLang from '@/components/SelectLang';
 import logo from '../assets/logo.png';
 import styles from './UserLayout.less';
 
@@ -25,7 +23,6 @@ const UserLayout = props => {
   const { breadcrumb } = getMenuData(routes);
   const title = getPageTitle({
     pathname: location.pathname,
-    formatMessage,
     breadcrumb,
     ...props,
   });
@@ -37,9 +34,6 @@ const UserLayout = props => {
       </Helmet>
 
       <div className={styles.container}>
-        <div className={styles.lang}>
-          <SelectLang />
-        </div>
         <div className={styles.content}>
           <div className={styles.top}>
             <div className={styles.header}>
