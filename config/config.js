@@ -18,14 +18,7 @@ const plugins = [
       dva: {
         hmr: true,
       },
-      locale: {
-        // default false
-        enable: true,
-        // default zh-CN
-        default: 'zh-CN',
-        // default true, when it is true, will use `navigator.language` overwrite default
-        baseNavigator: true,
-      },
+      locale: false,
       dynamicImport: {
         loadingComponent: './components/PageLoading/index',
         webpackChunkName: true,
@@ -76,7 +69,7 @@ if (isAntDesignProPreview) {
 
 export default {
   plugins,
-  hash: true,
+  hash: false,
   targets: {
     ie: 11,
   },
@@ -97,6 +90,18 @@ export default {
               component: './login',
             },
             {
+              name: '找回密码',
+              icon: 'UserOutlined',
+              path: '/login/forget',
+              component: './forget',
+            },
+            {
+              name: '找回密码结果',
+              icon: 'UserOutlined',
+              path: '/login/forget-result',
+              component: './forgetResult',
+            },
+            {
               component: '404',
             },
           ],
@@ -104,20 +109,289 @@ export default {
         {
           path: '/',
           component: '../layouts/BasicLayout',
+          Routes: ['src/pages/Authorized'],
+          authority: ['老师', '学生'],
           routes: [
-            {},
-            {},
             {
+              path: '/user',
+              name: '用户',
+              icon: 'user',
+              // authority: ['老师', '学生'],
               routes: [
                 {
-                  icon: 'smile',
+                  name: '工作台',
+                  icon: 'UserOutlined',
+                  path: '/user/workplace',
+                  component: './user/workplace',
+                  authority: ['学生'],
+                },
+                {
+                  name: '工作台',
+                  icon: 'UserOutlined',
+                  path: '/user/monitor',
+                  component: './user/monitor',
+                  authority: ['老师'],
+                },
+                {
+                  name: '个人设置',
+                  icon: 'SettingOutlined',
+                  path: '/user/settings',
+                  component: './user/settings',
+                  authority: ['老师', '学生'],
+                },
+                {
+                  name: '浏览用户',
+                  icon: 'SettingOutlined',
+                  path: '/user/find-user',
+                  component: './user/findUser',
+                  authority: ['老师', '学生'],
+                },
+                {
+                  name: '注册',
+                  icon: 'UsergroupAddOutlined',
+                  path: '/user/register',
+                  component: './user/register',
+                  authority: ['老师'],
+                },
+                {
+                  name: '注销',
+                  icon: 'UsergroupAddOutlined',
+                  path: '/user/remove',
+                  component: './user/remove',
+                  authority: ['老师'],
+                },
+                {
+                  component: '404',
                 },
               ],
             },
             {
-              path: '/list',
+              path: '/team',
+              name: '团队',
+              icon: 'TeamOutlined',
+              authority: ['学生'],
+              routes: [
+                {
+                  name: '创建团队',
+                  icon: 'PlusOutlined',
+                  path: '/team/save-team',
+                  component: './team/saveTeam',
+                  authority: ['学生'],
+                },
+                {
+                  name: '浏览团队',
+                  icon: 'UnorderedListOutlined',
+                  path: '/team/find-team',
+                  component: './team/findTeam',
+                  authority: ['学生'],
+                },
+                {
+                  name: '我的团队',
+                  icon: 'UnorderedListOutlined',
+                  path: '/team/find-my-team',
+                  component: './team/findMyTeam',
+                  authority: ['学生'],
+                },
+                {
+                  name: '申请管理',
+                  icon: 'UnorderedListOutlined',
+                  path: '/team/apply-team',
+                  component: './team/applyTeam',
+                  authority: ['学生'],
+                },
+                {
+                  name: '修改团队',
+                  icon: 'UnorderedListOutlined',
+                  path: '/team/save-my-team',
+                  component: './team/saveMyTeam',
+                  authority: ['学生'],
+                  hideInMenu: true,
+                },
+                {
+                  name: '查看团队',
+                  icon: 'UnorderedListOutlined',
+                  path: '/team/read-team',
+                  component: './team/readTeam',
+                  authority: ['学生'],
+                  hideInMenu: true,
+                },
+                {
+                  component: '404',
+                },
+              ],
             },
-            {},
+            {
+              path: '/match',
+              name: '比赛',
+              icon: 'RadiusUprightOutlined',
+              authority: ['老师', '学生'],
+              routes: [
+                {
+                  name: '创建比赛',
+                  icon: 'PlusOutlined',
+                  path: '/match/save-match',
+                  component: './match/saveMatch',
+                  authority: ['老师'],
+                },
+                {
+                  name: '浏览比赛',
+                  icon: 'UnorderedListOutlined',
+                  path: '/match/find-match',
+                  component: './match/findMatch',
+                  authority: ['学生', '老师'],
+                },
+                {
+                  name: '录入比赛结果',
+                  icon: 'UnorderedListOutlined',
+                  path: '/match/save-match-result',
+                  component: './match/saveMatchResult',
+                  authority: ['老师'],
+                },
+                {
+                  component: '404',
+                },
+              ],
+            },
+            {
+              path: '/registration',
+              name: '报名',
+              icon: 'RadiusUprightOutlined',
+              authority: ['老师', '学生'],
+              routes: [
+                {
+                  name: '比赛报名',
+                  icon: 'PlusOutlined',
+                  path: '/registration/apply-match',
+                  component: './registration/applyMatch',
+                  authority: ['学生'],
+                },
+                {
+                  name: '报名审核',
+                  icon: 'PlusOutlined',
+                  path: '/registration/find-registration',
+                  component: './registration/findRegistration',
+                  authority: ['老师'],
+                },
+                {
+                  name: '导出报名表',
+                  icon: 'PlusOutlined',
+                  path: '/registration/download-registration',
+                  component: './registration/downloadRegistration',
+                  authority: ['老师'],
+                },
+                {
+                  component: '404',
+                },
+              ],
+            },
+            {
+              path: '/fighting-capacity',
+              name: '战斗力',
+              icon: 'RadiusUprightOutlined',
+              authority: ['学生'],
+              routes: [
+                {
+                  name: '战斗力记录',
+                  icon: 'PlusOutlined',
+                  path: '/fighting-capacity/find-fighting-capacity',
+                  component: './fightingCapacity/findFightingCapacity',
+                  authority: ['学生'],
+                },
+                {
+                  component: '404',
+                },
+              ],
+            },
+            {
+              path: '/announcement',
+              name: '公告',
+              icon: 'RadiusUprightOutlined',
+              authority: ['老师', '学生'],
+              routes: [
+                {
+                  name: '创建公告',
+                  icon: 'PlusOutlined',
+                  path: '/announcement/save-announcement',
+                  component: './announcement/saveAnnouncement',
+                  authority: ['老师'],
+                },
+                {
+                  name: '浏览公告',
+                  icon: 'PlusOutlined',
+                  path: '/announcement/find-announcement',
+                  component: './announcement/findAnnouncement',
+                  authority: ['老师', '学生'],
+                },
+                {
+                  name: '修改公告',
+                  icon: 'PlusOutlined',
+                  path: '/announcement/save-apply-announcement',
+                  component: './announcement/saveApplyAnnouncement',
+                  authority: ['老师'],
+                  hideInMenu: true,
+                },
+                {
+                  name: '查看公告',
+                  icon: 'PlusOutlined',
+                  path: '/announcement/read-announcement',
+                  component: './announcement/readAnnouncement',
+                  authority: ['老师', '学生'],
+                  hideInMenu: true,
+                },
+                {
+                  component: '404',
+                },
+              ],
+            },
+            {
+              name: 'result',
+              icon: 'CheckCircleOutlined',
+              path: '/result',
+              hideInMenu: true,
+              routes: [
+                {
+                  name: 'success',
+                  icon: 'smile',
+                  path: '/result/success',
+                  component: './result/success',
+                },
+                {
+                  name: 'fail',
+                  icon: 'smile',
+                  path: '/result/fail',
+                  component: './result/fail',
+                },
+              ],
+            },
+            {
+              name: 'exception',
+              icon: 'warning',
+              path: '/exception',
+              hideInMenu: true,
+              routes: [
+                {
+                  name: '403',
+                  icon: 'smile',
+                  path: '/exception/403',
+                  component: './exception/403',
+                },
+                {
+                  name: '404',
+                  icon: 'smile',
+                  path: '/exception/404',
+                  component: './exception/404',
+                },
+                {
+                  name: '500',
+                  icon: 'smile',
+                  path: '/exception/500',
+                  component: './exception/500',
+                },
+              ],
+            },
+            {
+              component: '404',
+            },
           ],
         },
       ],
