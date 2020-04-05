@@ -1,17 +1,15 @@
 export default {
-  navTheme: 'dark',
-  // 拂晓蓝
+  navTheme: 'light',
   primaryColor: '#1890ff',
-  layout: 'sidemenu',
+  layout: 'topmenu',
   contentWidth: 'Fluid',
-  fixedHeader: false,
+  fixedHeader: true,
   autoHideHeader: false,
   fixSiderbar: false,
-  colorWeak: false,
   menu: {
     locale: true,
   },
-  title: 'Ant Design Pro',
+  title: '学科竞赛训练管理系统',
   pwa: false,
   iconfontUrl: '',
 };
