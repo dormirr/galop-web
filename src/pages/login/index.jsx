@@ -1,8 +1,9 @@
-import { Alert, Checkbox } from 'antd';
-import React, { useState } from 'react';
+import { Alert, Button } from 'antd';
+import React from 'react';
 import { connect } from 'dva';
 import styles from './style.less';
 import LoginFrom from './components/Login';
+import Link from 'umi/link';
 
 const { UserName, Password, Submit } = LoginFrom;
 
@@ -20,7 +21,6 @@ const LoginMessage = ({ content }) => (
 const Login = props => {
   const { login = {}, submitting } = props;
   const { status } = login;
-  const [autoLogin, setAutoLogin] = useState(true);
 
   const handleSubmit = values => {
     const { dispatch } = props;
@@ -34,12 +34,12 @@ const Login = props => {
     <div className={styles.main}>
       <LoginFrom onSubmit={handleSubmit}>
         {status === 'error' && !submitting && (
-          <LoginMessage content="账户或密码错误（admin/ant.design）" />
+          <LoginMessage content="账户或密码错误" />
         )}
 
         <UserName
           name="username"
-          placeholder="用户名: admin or 201620205052"
+          placeholder="用户名: 20060000363 or 201620205052"
           rules={[
             {
               required: true,
@@ -58,20 +58,12 @@ const Login = props => {
             },
           ]}
         />
-
-        <div>
-          <Checkbox checked={autoLogin} onChange={e => setAutoLogin(e.target.checked)}>
-            自动登录
-          </Checkbox>
-          <a
-            style={{
-              float: 'right',
-            }}
-          >
-            忘记密码
-          </a>
-        </div>
         <Submit loading={submitting}>登录</Submit>
+        <Link to={{
+          pathname: 'login/forget',
+        }}>
+          <Button size="large" block>重置密码</Button>
+        </Link>
       </LoginFrom>
     </div>
   );

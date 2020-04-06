@@ -43,8 +43,12 @@ const Model = {
             return;
           }
         }
-
-        yield put(routerRedux.replace(redirect || '/'));
+        if(sessionStorage.getItem('authority')[2]==="老"){
+          yield put(routerRedux.replace(redirect || '/user/monitor'));
+        }else{
+          yield put(routerRedux.replace(redirect || '/user/workplace'));
+        }
+        
       } else if (response.status === 401) {
         message.error('账号或密码错误！');
       }
