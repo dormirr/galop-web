@@ -84,20 +84,20 @@ export default {
           component: '../layouts/UserLayout',
           routes: [
             {
-              name: 'login',
-              icon: 'login',
+              name: '登录',
+              icon: 'CloudOutlined',
               path: '/login',
               component: './login',
             },
             {
               name: '找回密码',
-              icon: 'UserOutlined',
+              icon: 'CloudOutlined',
               path: '/login/forget',
               component: './forget',
             },
             {
               name: '找回密码结果',
-              icon: 'UserOutlined',
+              icon: 'CloudOutlined',
               path: '/login/forget-result',
               component: './forgetResult',
             },
@@ -115,19 +115,19 @@ export default {
             {
               path: '/user',
               name: '用户',
-              icon: 'user',
-              // authority: ['老师', '学生'],
+              icon: 'UserOutlined',
+              authority: ['老师', '学生'],
               routes: [
                 {
                   name: '工作台',
-                  icon: 'UserOutlined',
+                  icon: 'RadarChartOutlined',
                   path: '/user/workplace',
                   component: './user/workplace',
                   authority: ['学生'],
                 },
                 {
                   name: '工作台',
-                  icon: 'UserOutlined',
+                  icon: 'RadarChartOutlined',
                   path: '/user/monitor',
                   component: './user/monitor',
                   authority: ['老师'],
@@ -141,10 +141,10 @@ export default {
                 },
                 {
                   name: '浏览用户',
-                  icon: 'SettingOutlined',
+                  icon: 'EyeOutlined',
                   path: '/user/find-user',
                   component: './user/findUser',
-                  authority: ['老师', '学生'],
+                  authority: ['老师'],
                 },
                 {
                   name: '注册',
@@ -155,7 +155,7 @@ export default {
                 },
                 {
                   name: '注销',
-                  icon: 'UsergroupAddOutlined',
+                  icon: 'UsergroupDeleteOutlined',
                   path: '/user/remove',
                   component: './user/remove',
                   authority: ['老师'],
@@ -180,28 +180,28 @@ export default {
                 },
                 {
                   name: '浏览团队',
-                  icon: 'UnorderedListOutlined',
+                  icon: 'EyeOutlined',
                   path: '/team/find-team',
                   component: './team/findTeam',
                   authority: ['学生'],
                 },
                 {
                   name: '我的团队',
-                  icon: 'UnorderedListOutlined',
+                  icon: 'GitlabOutlined',
                   path: '/team/find-my-team',
                   component: './team/findMyTeam',
                   authority: ['学生'],
                 },
                 {
                   name: '申请管理',
-                  icon: 'UnorderedListOutlined',
+                  icon: 'AppstoreAddOutlined',
                   path: '/team/apply-team',
                   component: './team/applyTeam',
                   authority: ['学生'],
                 },
                 {
                   name: '修改团队',
-                  icon: 'UnorderedListOutlined',
+                  icon: 'EditOutlined',
                   path: '/team/save-my-team',
                   component: './team/saveMyTeam',
                   authority: ['学生'],
@@ -209,7 +209,7 @@ export default {
                 },
                 {
                   name: '查看团队',
-                  icon: 'UnorderedListOutlined',
+                  icon: 'EyeOutlined',
                   path: '/team/read-team',
                   component: './team/readTeam',
                   authority: ['学生'],
@@ -223,26 +223,26 @@ export default {
             {
               path: '/match',
               name: '比赛',
-              icon: 'RadiusUprightOutlined',
+              icon: 'RightSquareOutlined',
               authority: ['老师', '学生'],
               routes: [
                 {
                   name: '创建比赛',
-                  icon: 'PlusOutlined',
+                  icon: 'SendOutlined',
                   path: '/match/save-match',
                   component: './match/saveMatch',
                   authority: ['老师'],
                 },
                 {
                   name: '浏览比赛',
-                  icon: 'UnorderedListOutlined',
+                  icon: 'SearchOutlined',
                   path: '/match/find-match',
                   component: './match/findMatch',
                   authority: ['学生', '老师'],
                 },
                 {
                   name: '录入比赛结果',
-                  icon: 'UnorderedListOutlined',
+                  icon: 'LoginOutlined',
                   path: '/match/save-match-result',
                   component: './match/saveMatchResult',
                   authority: ['老师'],
@@ -255,26 +255,26 @@ export default {
             {
               path: '/registration',
               name: '报名',
-              icon: 'RadiusUprightOutlined',
+              icon: 'StarOutlined',
               authority: ['老师', '学生'],
               routes: [
                 {
                   name: '比赛报名',
-                  icon: 'PlusOutlined',
+                  icon: 'BulbOutlined',
                   path: '/registration/apply-match',
                   component: './registration/applyMatch',
                   authority: ['学生'],
                 },
                 {
                   name: '报名审核',
-                  icon: 'PlusOutlined',
+                  icon: 'CheckCircleOutlined',
                   path: '/registration/find-registration',
                   component: './registration/findRegistration',
                   authority: ['老师'],
                 },
                 {
                   name: '导出报名表',
-                  icon: 'PlusOutlined',
+                  icon: 'VerticalAlignBottomOutlined',
                   path: '/registration/download-registration',
                   component: './registration/downloadRegistration',
                   authority: ['老师'],
@@ -287,12 +287,12 @@ export default {
             {
               path: '/fighting-capacity',
               name: '战斗力',
-              icon: 'RadiusUprightOutlined',
+              icon: 'RiseOutlined',
               authority: ['学生'],
               routes: [
                 {
                   name: '战斗力记录',
-                  icon: 'PlusOutlined',
+                  icon: 'RiseOutlined',
                   path: '/fighting-capacity/find-fighting-capacity',
                   component: './fightingCapacity/findFightingCapacity',
                   authority: ['学生'],
@@ -305,26 +305,26 @@ export default {
             {
               path: '/announcement',
               name: '公告',
-              icon: 'RadiusUprightOutlined',
+              icon: 'BellOutlined',
               authority: ['老师', '学生'],
               routes: [
                 {
                   name: '创建公告',
-                  icon: 'PlusOutlined',
+                  icon: 'FormOutlined',
                   path: '/announcement/save-announcement',
                   component: './announcement/saveAnnouncement',
                   authority: ['老师'],
                 },
                 {
                   name: '浏览公告',
-                  icon: 'PlusOutlined',
+                  icon: 'CopyOutlined',
                   path: '/announcement/find-announcement',
                   component: './announcement/findAnnouncement',
                   authority: ['老师', '学生'],
                 },
                 {
                   name: '修改公告',
-                  icon: 'PlusOutlined',
+                  icon: 'HighlightOutlined',
                   path: '/announcement/save-apply-announcement',
                   component: './announcement/saveApplyAnnouncement',
                   authority: ['老师'],
@@ -332,7 +332,7 @@ export default {
                 },
                 {
                   name: '查看公告',
-                  icon: 'PlusOutlined',
+                  icon: 'AlignLeftOutlined',
                   path: '/announcement/read-announcement',
                   component: './announcement/readAnnouncement',
                   authority: ['老师', '学生'],
