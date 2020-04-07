@@ -8,34 +8,32 @@ const TableList = () => {
   const [sorter, setSorter] = useState('');
   const columns = [
     {
-      title: '变动 ID',
-      dataIndex: 'id',
-      align: 'center',
-      hideInSearch: true,
-      sorter: true,
-    },
-    {
       title: '变化时间',
       dataIndex: 'createTime',
       align: 'center',
+      sorter: true,
       valueType: 'dateTime',
       hideInSearch: true,
-      sorter: true,
     },
     {
       title: '比赛 ID',
       dataIndex: ['matchInfoByMatchInfoId','id'],
       align: 'center',
+      valueType: 'digit',
+      hideInSearch: true,
     },
     {
       title: '比赛名称',
       dataIndex: ['matchInfoByMatchInfoId','matchName'],
       align: 'center',
+      ellipsis: true,
+      hideInSearch: true,
     },
     {
       title: '奖励',
       dataIndex: 'reward',
       align: 'center',
+      valueType: 'digit',
       hideInSearch: true,
     },
   ];
@@ -50,6 +48,7 @@ const TableList = () => {
         pagination={{
           hideOnSinglePage: true,
         }}
+        search={false}
         rowKey="id"
         request={(params) => findFightingCapacity(params)}
         onChange={(_, _filter, sorter) => {
