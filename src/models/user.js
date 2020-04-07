@@ -12,14 +12,15 @@ const UserModel = {
     /**
      * 更新当前用户信息
      */
-    *updateCurrentUser({ payload }, { call }) {
+    *updateCurrentUser({ payload }, { call,put }) {
       const response = yield call(updateCurrentUser, payload);
+      yield put({
+        type: 'fetchCurrentUser',
+      });
 
       // 更新成功
       if (response.status === 201) {
-        message.success('更新信息成功！稍后会自动刷新！');
-        // eslint-disable-next-line no-restricted-globals
-        location.reload(false);
+        message.success('更新信息成功！');
       }
     },
 
@@ -29,7 +30,7 @@ const UserModel = {
     *fetchCurrentUser(_, { call, put }) {
       const response = yield call(queryCurrentUser);
       yield put({
-        type: 'saveCurrentUser',
+        type: 'fetchCurrentUserRe',
         payload: response,
       });
     },
@@ -37,12 +38,8 @@ const UserModel = {
     /**
      * 修改密码
      */
-    *submitPassword({ payload }, { call, put }) {
+    *submitPassword({ payload }, { call }) {
       const response = yield call(updatePassword, payload);
-      yield put({
-        type: 'updateHandle',
-        payload: response,
-      });
 
       if (response.status === 201) {
         message.success('修改密码成功！请重新登录！');
@@ -58,15 +55,8 @@ const UserModel = {
     /**
      * 保存当前用户
      */
-    saveCurrentUser(state, action) {
+    fetchCurrentUserRe(state, action) {
       return { ...state, currentUser: action.payload };
-    },
-
-    /**
-     * 返回修改密码结果
-     */
-    updateHandle(state, { payload }) {
-      return { ...state, status: payload.status };
     },
 
     changeNotifyCount(
