@@ -1,26 +1,13 @@
 import { Form, Button, Input, Popover, Progress } from 'antd';
-import { FormattedMessage, formatMessage } from 'umi-plugin-react/locale';
 import React, { useState } from 'react';
 import { connect } from 'dva';
 import styles from './style.less';
 
 const FormItem = Form.Item;
 const passwordStatusMap = {
-  ok: (
-    <div className={styles.success}>
-      <FormattedMessage id="userandregister.strength.strong" />
-    </div>
-  ),
-  pass: (
-    <div className={styles.warning}>
-      <FormattedMessage id="userandregister.strength.medium" />
-    </div>
-  ),
-  poor: (
-    <div className={styles.error}>
-      <FormattedMessage id="userandregister.strength.short" />
-    </div>
-  ),
+  ok: <div className={styles.success}>强度：强</div>,
+  pass: <div className={styles.warning}>强度：中</div>,
+  poor: <div className={styles.error}>强度：太短</div>,
 };
 const passwordProgressMap = {
   ok: 'success',
@@ -59,11 +46,7 @@ const Register = ({ submitting, dispatch }) => {
     const promise = Promise;
 
     if (value && value !== form.getFieldValue('userPassword')) {
-      return promise.reject(
-        formatMessage({
-          id: 'userandregister.password.twice',
-        }),
-      );
+      return promise.reject('两次输入的密码不匹配!');
     }
 
     return promise.resolve();
@@ -74,11 +57,7 @@ const Register = ({ submitting, dispatch }) => {
 
     if (!value) {
       setvisible(!!value);
-      return promise.reject(
-        formatMessage({
-          id: 'userandregister.password.required',
-        }),
-      );
+      return promise.reject('请输入密码！');
     } // 有值的情况
 
     if (!visible) {
@@ -146,7 +125,7 @@ const Register = ({ submitting, dispatch }) => {
                       marginTop: 10,
                     }}
                   >
-                    <FormattedMessage id="userandregister.strength.msg" />
+                    请至少输入 6 个字符。请不要使用容易被猜到的密码。
                   </div>
                 </div>
               )
@@ -164,9 +143,7 @@ const Register = ({ submitting, dispatch }) => {
                 form.getFieldValue('userPassword').length > 0 &&
                 styles.password
               }
-              label={formatMessage({
-                id: '密码',
-              })}
+              label="密码"
               rules={[
                 {
                   required: true,
@@ -174,41 +151,27 @@ const Register = ({ submitting, dispatch }) => {
                 },
               ]}
             >
-              <Input
-                type="password"
-                placeholder={formatMessage({
-                  id: 'userandregister.password.placeholder',
-                })}
-              />
+              <Input type="password" placeholder="至少6位密码，区分大小写" />
             </FormItem>
           </Popover>
           <FormItem
             name="confirm"
-            label={formatMessage({
-              id: '确认密码',
-            })}
+            label="确认密码"
             rules={[
               {
                 required: true,
-                message: formatMessage({
-                  id: 'userandregister.confirm-password.required',
-                }),
+                message: '请确认密码！',
               },
               {
                 validator: checkConfirm,
               },
             ]}
           >
-            <Input
-              type="password"
-              placeholder={formatMessage({
-                id: 'userandregister.confirm-password.placeholder',
-              })}
-            />
+            <Input type="password" placeholder="确认密码" />
           </FormItem>
           <FormItem>
             <Button loading={submitting} type="primary" htmlType="submit">
-              <FormattedMessage id="修改密码" />
+              修改密码
             </Button>
           </FormItem>
         </Form>

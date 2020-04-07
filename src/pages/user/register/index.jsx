@@ -1,6 +1,5 @@
 import { UploadOutlined, DownloadOutlined } from '@ant-design/icons';
 import { Button, Card, Form, Upload, message } from 'antd';
-import { FormattedMessage } from 'umi-plugin-react/locale';
 import React from 'react';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import { connect } from 'dva';
@@ -29,9 +28,8 @@ const BasicForm = () => {
         span: 10,
       },
     },
-  };
+  }; // 上传文件改变时的状态
 
-  // 上传文件改变时的状态
   const onChange = info => {
     if (info.file.status === 'done') {
       message.success(`文件上传成功！共添加${info.file.response.suc}个账号！`);
@@ -43,7 +41,7 @@ const BasicForm = () => {
   };
 
   return (
-    <PageHeaderWrapper content={<FormattedMessage id="通过 Excel 批量导入用户账号。" />}>
+    <PageHeaderWrapper content="通过 Excel 批量导入用户账号。">
       <Card bordered={false}>
         <Form
           style={{

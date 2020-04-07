@@ -1,15 +1,13 @@
 import { UploadOutlined } from '@ant-design/icons';
 import { Button, Input, Upload, Form, message } from 'antd';
-import { FormattedMessage, formatMessage } from 'umi-plugin-react/locale';
 import React, { Component } from 'react';
 import { connect } from 'dva';
-import styles from './BaseView.less';
+import styles from './BaseView.less'; // 上传文件改变时的状态
 
-// 上传文件改变时的状态
 const onChange = info => {
   if (info.file.status === 'done') {
-    message.success(`头像上传成功！稍后会自动刷新！`);
-    // eslint-disable-next-line no-restricted-globals
+    message.success(`头像上传成功！稍后会自动刷新！`); // eslint-disable-next-line no-restricted-globals
+
     location.reload(false);
   } else if (info.file.status === 'error') {
     message.error(`头像上传失败！`);
@@ -18,9 +16,7 @@ const onChange = info => {
 
 const AvatarView = ({ avatar }) => (
   <>
-    <div className={styles.avatar_title}>
-      <FormattedMessage id="头像" defaultMessage="头像" />
-    </div>
+    <div className={styles.avatar_title}>头像</div>
     <div className={styles.avatar}>
       <img src={avatar} alt="avatar" />
     </div>
@@ -37,7 +33,7 @@ const AvatarView = ({ avatar }) => (
       <div className={styles.button_view}>
         <Button>
           <UploadOutlined />
-          <FormattedMessage id="更换头像" defaultMessage="更换头像" />
+          更换头像
         </Button>
       </div>
     </Upload>
@@ -54,6 +50,7 @@ class BaseView extends Component {
       if (currentUser.userPortrait) {
         return currentUser.userPortrait;
       }
+
       const url = 'https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png';
       return url;
     }
@@ -75,7 +72,6 @@ class BaseView extends Component {
 
   render() {
     const { currentUser, submitting } = this.props;
-
     return (
       <div className={styles.baseView} ref={this.getViewDom}>
         <div className={styles.left}>
@@ -87,15 +83,11 @@ class BaseView extends Component {
           >
             <Form.Item
               name="userEmail"
-              label={formatMessage({
-                id: '邮箱',
-              })}
+              label="邮箱"
               rules={[
                 {
                   required: true,
-                  message: formatMessage({
-                    id: '请输入您的邮箱！',
-                  }),
+                  message: '请输入您的邮箱！',
                 },
               ]}
             >
@@ -103,15 +95,11 @@ class BaseView extends Component {
             </Form.Item>
             <Form.Item
               name="userName"
-              label={formatMessage({
-                id: '姓名',
-              })}
+              label="姓名"
               rules={[
                 {
                   required: true,
-                  message: formatMessage({
-                    id: '请输入您的姓名！',
-                  }),
+                  message: '请输入您的姓名！',
                 },
               ]}
             >
@@ -119,10 +107,7 @@ class BaseView extends Component {
             </Form.Item>
             <Form.Item>
               <Button htmlType="submit" type="primary" loading={submitting}>
-                <FormattedMessage
-                  id="accountandsettings.basic.update"
-                  defaultMessage="Update Information"
-                />
+                更新基本信息
               </Button>
             </Form.Item>
           </Form>

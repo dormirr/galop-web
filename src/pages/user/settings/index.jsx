@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { FormattedMessage } from 'umi-plugin-react/locale';
-import { GridContent } from '@ant-design/pro-layout';
+import { GridContent, PageHeaderWrapper } from '@ant-design/pro-layout';
 import { Menu } from 'antd';
 import { connect } from 'dva';
 import BaseView from './components/base';
@@ -15,15 +14,8 @@ class Settings extends Component {
   constructor(props) {
     super(props);
     const menuMap = {
-      base: (
-        <FormattedMessage id="accountandsettings.menuMap.basic" defaultMessage="Basic Settings" />
-      ),
-      security: (
-        <FormattedMessage
-          id="accountandsettings.menuMap.security"
-          defaultMessage="Security Settings"
-        />
-      ),
+      base: '基本设置',
+      security: '安全设置',
     };
     this.state = {
       mode: 'inline',
@@ -109,26 +101,32 @@ class Settings extends Component {
   render() {
     const { mode, selectKey } = this.state;
     return (
-      <GridContent>
-        <div
-          className={styles.main}
-          ref={ref => {
-            if (ref) {
-              this.main = ref;
-            }
-          }}
-        >
-          <div className={styles.leftMenu}>
-            <Menu mode={mode} selectedKeys={[selectKey]} onClick={({ key }) => this.selectKey(key)}>
-              {this.getMenu()}
-            </Menu>
+      <PageHeaderWrapper content="修改个人信息。">
+        <GridContent>
+          <div
+            className={styles.main}
+            ref={ref => {
+              if (ref) {
+                this.main = ref;
+              }
+            }}
+          >
+            <div className={styles.leftMenu}>
+              <Menu
+                mode={mode}
+                selectedKeys={[selectKey]}
+                onClick={({ key }) => this.selectKey(key)}
+              >
+                {this.getMenu()}
+              </Menu>
+            </div>
+            <div className={styles.right}>
+              <div className={styles.title}>{this.getRightTitle()}</div>
+              {this.renderChildren()}
+            </div>
           </div>
-          <div className={styles.right}>
-            <div className={styles.title}>{this.getRightTitle()}</div>
-            {this.renderChildren()}
-          </div>
-        </div>
-      </GridContent>
+        </GridContent>
+      </PageHeaderWrapper>
     );
   }
 }
