@@ -22,7 +22,7 @@ const AvatarView = ({ avatar }) => (
     </div>
     <Upload
       accept=".jpg,.png"
-      action="http://localhost:8080/role/updatePortrait"
+      action="https://localhost:8080/role/updatePortrait"
       method="put"
       headers={{
         Authorization: sessionStorage.getItem('Authorization'),

@@ -51,7 +51,7 @@ const BasicForm = () => {
           name="register"
         >
           <FormItem {...formItemLayout} label="Excel 模板" name="excel">
-            <Button icon={<DownloadOutlined />} href="http://localhost:8080/file/注销用户模板.xlsx">
+            <Button icon={<DownloadOutlined />} href="https://localhost:8080/file/注销用户模板.xlsx">
               点击下载
             </Button>
           </FormItem>
@@ -64,7 +64,7 @@ const BasicForm = () => {
             <div>
               <Upload
                 accept=".xlsx,.xls"
-                action="http://localhost:8080/role/remove"
+                action="https://localhost:8080/role/remove"
                 headers={{
                   Authorization: sessionStorage.getItem('Authorization'),
                 }}

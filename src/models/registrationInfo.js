@@ -26,7 +26,7 @@ const Model = {
       const response = yield call(downloadRegistrationInfo, payload);
       if (response.success) {
         message.success('报名表导出成功！');
-        window.location.href = `http://localhost:8080/file/${response.download}`;
+        window.location.href = `https://localhost:8080/file/${response.download}`;
       } else {
         message.error(`失败！原因是无人报名或比赛ID不存在！`);
       }

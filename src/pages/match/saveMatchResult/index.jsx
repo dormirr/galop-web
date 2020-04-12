@@ -51,7 +51,7 @@ const BasicForm = () => {
           <FormItem {...formItemLayout} label="Excel 模板" name="excel">
             <Button
               icon={<DownloadOutlined />}
-              href="http://localhost:8080/file/录入比赛结果模板.xlsx"
+              href="https://localhost:8080/file/录入比赛结果模板.xlsx"
             >
               点击下载
             </Button>
@@ -65,7 +65,7 @@ const BasicForm = () => {
             <div>
               <Upload
                 accept=".xlsx,.xls"
-                action="http://localhost:8080/match-result/save-match-result"
+                action="https://localhost:8080/match-result/save-match-result"
                 headers={{
                   Authorization: sessionStorage.getItem('Authorization'),
                 }}
