@@ -16,7 +16,7 @@ const RegisterResult = ({ location }) => (
     className={styles.registerResult}
     status="success"
     title={<div className={styles.title}>密码重置邮件已发送！</div>}
-    subTitle="重置密码邮件已发送到你的邮箱中。请及时登录邮箱查看。"
+    subTitle="重置密码邮件已发送到你的邮箱中，5分钟内有效。请及时登录邮箱查看。"
     extra={actions}
   />
 );

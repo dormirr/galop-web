@@ -15,7 +15,7 @@ const Model = {
       if (response.success) {
         message.success('成功发送申请！');
       } else {
-        message.error(`失败！原因是你已有待审批或通过的申请或团队人数不符或你不是队长或比赛ID与团队ID不存在！`);
+        message.error(`失败！原因是你已有待审批或通过的申请或团队人数不符或你不是队长或比赛ID与团队ID不存在或比赛报名结束！`);
       }
     },
 
