@@ -50,7 +50,7 @@ const TableList = () => {
           <Button
             type="primary"
             onClick={() => {
-              forgetUser(record.id);
+              forgetUser(record.userNumber);
             }}>
             重置密码
         </Button>

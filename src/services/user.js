@@ -1,4 +1,5 @@
 import request from '@/utils/request';
+import { message } from 'antd';
 
 export async function query() {
   return request('/api/users');
@@ -75,7 +76,7 @@ export async function forgetUser(params) {
       Authorization: sessionStorage.getItem('Authorization'),
     },
     data: {
-      id: params,
+      userNumber: params,
     }
   }).then(response => {
     if (response.success) {
