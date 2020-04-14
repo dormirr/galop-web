@@ -1,4 +1,4 @@
-import { Avatar, Card, Col, List, Skeleton, Row, Statistic, Tooltip } from 'antd';
+import { Avatar, Card, Col, List, Skeleton, Row, Statistic, Tooltip, LocaleProvider } from 'antd';
 import React, { Component, useRef, useEffect } from 'react';
 import { Link } from 'umi';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
@@ -6,6 +6,8 @@ import { connect } from 'dva';
 import moment from 'moment';
 import { Area } from '@antv/g2plot';
 import styles from './style.less';
+import zh_CN from 'antd/lib/locale-provider/zh_CN';
+import 'moment/locale/zh-cn';
 
 const PageHeaderContent = ({ currentUser }) => {
   const loading = currentUser && Object.keys(currentUser).length;
@@ -85,25 +87,27 @@ class Workplace extends Component {
 
   renderActivities = item => {
     return (
-      <List.Item key={item.id}>
-        <List.Item.Meta
-          title={
-            <span>
-              <Link to={{
-                pathname: '../announcement/read-announcement',
-                state: { id: item.id },
-              }}>
-                {item.announcementTitle}
-              </Link>
-            </span>
-          }
-          description={
-            <span className={styles.datetime} title="公告发表时间">
-              公告发表于 {moment(item.createTime).fromNow()}
-            </span>
-          }
-        />
-      </List.Item>
+      <LocaleProvider locale={zh_CN}>
+        <List.Item key={item.id}>
+          <List.Item.Meta
+            title={
+              <span>
+                <Link to={{
+                  pathname: '../announcement/read-announcement',
+                  state: { id: item.id },
+                }}>
+                  {item.announcementTitle}
+                </Link>
+              </span>
+            }
+            description={
+              <span className={styles.datetime} title="公告发表时间">
+                公告发表于 {moment(item.createTime).fromNow()}
+              </span>
+            }
+          />
+        </List.Item>
+      </LocaleProvider>
     );
   };
 
@@ -247,7 +251,7 @@ class Workplace extends Component {
               />
             </Card>
           </Col>
-        </Row>        
+        </Row>
       </PageHeaderWrapper>
     );
   }
