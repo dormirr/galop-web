@@ -100,5 +100,5 @@ const BasicForm = props => {
 };
 
 export default connect(({ loading }) => ({
-  submitting: loading.effects['team/saveTeam'],
+  submitting: loading.effects['registrationInfo/downloadRegistrationInfo'],
 }))(BasicForm);

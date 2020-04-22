@@ -76,3 +76,15 @@ export async function downloadRegistrationInfo(params) {
     data: params,
   });
 }
+
+/**
+ * 查询我的申请
+ */
+export async function findMyRegistrationInfo(params) {
+  return request.get('/api/registration-info/find-my-registration-info', {
+    headers: {
+      Authorization: sessionStorage.getItem('Authorization'),
+    },
+    params,
+  });
+}

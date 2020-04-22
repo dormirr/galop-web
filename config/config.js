@@ -248,6 +248,13 @@ export default {
                   authority: ['老师'],
                 },
                 {
+                  name: '比赛结果',
+                  icon: 'LoginOutlined',
+                  path: '/match/find-match-result',
+                  component: './match/findMatchResult',
+                  authority: ['学生'],
+                },
+                {
                   component: '404',
                 },
               ],
@@ -279,6 +286,13 @@ export default {
                   component: './registration/downloadRegistration',
                   authority: ['老师'],
                 },
+                {
+                  name: '我的报名',
+                  icon: 'CheckCircleOutlined',
+                  path: '/registration/find-my-registration-info',
+                  component: './registration/findMyRegistrationInfo',
+                  authority: ['学生'],
+                },                
                 {
                   component: '404',
                 },
