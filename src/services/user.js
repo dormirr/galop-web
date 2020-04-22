@@ -86,3 +86,15 @@ export async function forgetUser(params) {
     }
   });
 }
+
+/**
+ * 导出用户表
+ */
+export async function downloadRole(params) {
+  return request.get('/api/role/download-role', {
+    headers: {
+      Authorization: sessionStorage.getItem('Authorization'),
+    },
+    data: params,
+  });
+}

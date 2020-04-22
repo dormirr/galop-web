@@ -1,5 +1,5 @@
 import { message } from 'antd';
-import { queryCurrentUser, updateCurrentUser, updatePassword } from '@/services/user';
+import { queryCurrentUser, updateCurrentUser, updatePassword, downloadRole } from '@/services/user';
 import { router } from 'umi';
 
 const UserModel = {
@@ -12,7 +12,7 @@ const UserModel = {
     /**
      * 更新当前用户信息
      */
-    *updateCurrentUser({ payload }, { call,put }) {
+    *updateCurrentUser({ payload }, { call, put }) {
       const response = yield call(updateCurrentUser, payload);
       yield put({
         type: 'fetchCurrentUser',
@@ -48,6 +48,19 @@ const UserModel = {
         // 删除角色权限
         sessionStorage.removeItem('authority');
         router.push('/login');
+      }
+    },
+
+    /**
+     * 导出用户表
+     */
+    *downloadRole({ payload }, { call }) {
+      const response = yield call(downloadRole, payload);
+      if (response.success) {
+        message.success('用户数据导出成功！');
+        window.location.href = `https://localhost:8080/file/${response.download}`;
+      } else {
+        message.error(`失败！`);
       }
     },
   },

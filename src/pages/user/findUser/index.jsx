@@ -1,11 +1,16 @@
 import { Avatar } from 'antd';
 import React, { useRef, useState } from 'react';
-import { Button } from 'antd';
+import { Button, Card, Form } from 'antd';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import ProTable from '@ant-design/pro-table';
 import { findUser, forgetUser } from '@/services/user'
+import { connect } from 'dva';
 
-const TableList = () => {
+const FormItem = Form.Item;
+
+const TableList = props => {
+  const { submitting } = props;
+  const [form] = Form.useForm();
   const actionRef = useRef();
   const [sorter, setSorter] = useState('');
   const columns = [
@@ -59,8 +64,33 @@ const TableList = () => {
     },
   ];
 
+  const submitFormLayout = {
+    wrapperCol: {
+      xs: {
+        span: 24,
+        offset: 0,
+      },
+      sm: {
+        span: 10,
+        offset: 7,
+      },
+    },
+  };
+
+  const onFinish = values => {
+    const { dispatch } = props;
+    dispatch({
+      type: 'user/downloadRole',
+      payload: values,
+    });
+  };
+
+  const onFinishFailed = errorInfo => {
+    console.log('Failed:', errorInfo);
+  };
+
   return (
-    <PageHeaderWrapper>
+    <PageHeaderWrapper>      
       <ProTable
         headerTitle="用户列表"
         columns={columns}
@@ -81,8 +111,35 @@ const TableList = () => {
           sorter,
         }}
       />
+      <Card bordered={false}>
+        <Form
+          hideRequiredMark
+          style={{
+            marginTop: 8,
+          }}
+          form={form}
+          name="basic"
+          initialValues={{
+            public: '1',
+          }}
+          onFinish={onFinish}
+          onFinishFailed={onFinishFailed}
+        >
+          <FormItem
+            style={{
+              marginTop: 32,
+            }}
+          >
+            <Button type="primary" htmlType="submit" loading={submitting}>
+              导出战斗力排名
+            </Button>
+          </FormItem>
+        </Form>
+      </Card>
     </PageHeaderWrapper>
   );
 };
 
-export default TableList;
+export default connect(({ loading }) => ({
+  submitting: loading.effects['user/downloadRole'],
+}))(TableList);
