@@ -10,7 +10,7 @@
 
 [后端地址](https://github.com/dormirr/galop-server)
 
-[系统详细介绍]([https://www.zhangtianci.cn/%E9%A1%B9%E7%9B%AE/%E5%AD%A6%E7%A7%91%E7%AB%9E%E8%B5%9B%E8%AE%AD%E7%BB%83%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%E9%A1%B9%E7%9B%AE/](https://www.zhangtianci.cn/项目/学科竞赛训练管理系统项目/))
+[系统详细介绍](https://www.zhangtianci.cn/项目/学科竞赛训练管理系统项目/)
 
 # 系统介绍
 
